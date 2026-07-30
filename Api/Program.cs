@@ -1,11 +1,19 @@
+using Application;
+using BattryShopApi.Extensions;
+using Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.ConfigureInfrastructure(builder.Configuration);
+builder.Services.ConfigureApplication();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerService();
+builder.Services.AddIdentityService();
+builder.Services.AddJwtAuthenticationServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -18,6 +26,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
