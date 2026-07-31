@@ -7,6 +7,10 @@ public partial class UserFeature
 {
     public async Task<Result<bool>> Register(User_Register_Request request)
     {
+        var validationResult = await _registerValidator.ValidateAsync(request);
+        if (!validationResult.IsValid)
+            return Result<bool>.FailRes(string.Join(" , ", validationResult.Errors.Select(i => i.ErrorMessage).ToList()));
+
         if (!string.IsNullOrWhiteSpace(request.Email))
         {
             var emailExist = await _userManager.FindByEmailAsync(request.Email);
@@ -23,6 +27,7 @@ public partial class UserFeature
 
         var user = new User
         {
+            UserName = request.PhoneNumber,
             FirstName = request.FirstName,
             LastName = request.LastName,
             PhoneNumber = request.PhoneNumber,
@@ -32,7 +37,7 @@ public partial class UserFeature
 
         var res = await _userManager.CreateAsync(user, request.Password);
         if (!res.Succeeded)
-            return Result<bool>.FailRes();
+            return Result<bool>.FailRes(string.Join(" , ", res.Errors.Select(i => i.Description).ToList()));
 
         await _userManager.AddToRoleAsync(user, "Customer");
 

@@ -15,6 +15,7 @@ public partial class UserFeature
         {
              new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
              new Claim(ClaimTypes.Name , user.FullName),
+             new Claim(ClaimTypes.MobilePhone , user.PhoneNumber),
              new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
         claims.AddRange(roles.Select(i => new Claim(ClaimTypes.Role, i)));

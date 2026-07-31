@@ -6,8 +6,6 @@ public class User_UpdateProfile_Validatior : AbstractValidator<User_UpdateProfil
 {
     public User_UpdateProfile_Validatior()
     {
-        RuleFor(x => x.PhoneNumber).ValidPhoneNumber();
-
         RuleFor(x => x.Email)
             .EmailAddress()
             .When(x => !string.IsNullOrWhiteSpace(x.Email))
