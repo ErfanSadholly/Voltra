@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Shared;
+﻿namespace Shared;
 
 public static class ErrorMessages
 {
@@ -13,4 +11,7 @@ public static class ErrorMessages
     public const string IsExistUserName = "این نام کاربری از قبل وجود دارد!";
     public const string IsExistUser = "این کاربر از قبل وجود دارد";
     public const string UserNotFound = "کاربر یافت نشد";
+    public const string IsExistRole = "نقش از قبل وجود دارد";
+    public const string IsExistUserInRole = "کاربری از قبل در این نقش وجود دارد";
+    public const string PasswordProperty = "رمز عبور باید دارای حداقل هفت کاراکتر و حداقل یک عدد باشد.";
 }
