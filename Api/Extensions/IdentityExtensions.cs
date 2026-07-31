@@ -11,12 +11,12 @@ public static class IdentityExtensions
         services.AddIdentity<User, Role>(option =>
         {
             option.Password.RequireDigit = true;
-            option.Password.RequiredLength = 7;
+            option.Password.RequiredLength = 8;
             option.Password.RequireNonAlphanumeric = false;
             option.Password.RequireUppercase = false;
             option.Password.RequireLowercase = false;
             option.Password.RequiredUniqueChars = 0;
-            option.User.RequireUniqueEmail = true;
+            option.User.RequireUniqueEmail = false;
 
         }).AddEntityFrameworkStores<MainDbContext>()
         .AddDefaultTokenProviders();
