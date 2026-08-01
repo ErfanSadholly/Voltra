@@ -1,5 +1,4 @@
 ﻿using Application.Features;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BattryShopApi.Controllers
@@ -28,7 +27,6 @@ namespace BattryShopApi.Controllers
             return Ok(res);
         }
 
-        [Authorize]
         [HttpPut("[action]")]
         public async Task<IActionResult> UpdateProfile([FromBody] User_UpdateProfile_Request request)
         {
@@ -36,11 +34,10 @@ namespace BattryShopApi.Controllers
             return Ok(res);
         }
 
-        [Authorize]
         [HttpGet("[action]")]
         public async Task<IActionResult> GetCurrentUser()
         {
-            var res = await _feature.GetCurrentUser();
+            var res = await _feature.GetCurrentUser(base.UserId);
             return Ok(res);
         }
 
@@ -55,6 +52,13 @@ namespace BattryShopApi.Controllers
         public async Task<IActionResult> ChangePhoneNumber(User_ChangePhoneNumber_Request request, int userId)
         {
             var res = await _feature.ChangePhoneNumber(request, base.UserId);
+            return Ok(res);
+        }
+
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> ResetPassword(User_ResetPassword_Request request, int id)
+        {
+            var res = await _feature.ResetPassword(id, request);
             return Ok(res);
         }
     }

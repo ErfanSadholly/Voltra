@@ -8,7 +8,7 @@ public partial class UserFeature
     {
         var validationResult = await _changePhoneNumberValidator.ValidateAsync(request);
         if (!validationResult.IsValid)
-            return Result<bool>.FailRes(string.Join(" , ", validationResult.Errors.Select(i => i.ErrorMessage).ToList()));
+            return Result<bool>.FailRes(validationResult.GetValidationErrors());
 
         var user = await _userManager.FindByIdAsync(userId.ToString());
         if (user is null)

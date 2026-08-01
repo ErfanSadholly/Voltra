@@ -4,13 +4,9 @@ namespace Application.Features;
 
 public partial class UserFeature
 {
-    public async Task<Result<User_GetCurrentUser_Response>> GetCurrentUser()
+    public async Task<Result<User_GetCurrentUser_Response>> GetCurrentUser(int userId)
     {
-        var userId = _httpContext.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        if (string.IsNullOrWhiteSpace(userId))
-            return Result<User_GetCurrentUser_Response>.FailRes(ErrorMessages.NotFound);
-
-        var user = await _userManager.FindByIdAsync(userId);
+        var user = await _userManager.FindByIdAsync(userId.ToString());
         if (user is null)
             return Result<User_GetCurrentUser_Response>.FailRes(ErrorMessages.UserNotFound);
 
