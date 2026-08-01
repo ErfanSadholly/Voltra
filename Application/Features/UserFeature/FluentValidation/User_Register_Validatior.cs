@@ -1,5 +1,4 @@
 ﻿using Application.Features;
-using Application.Validation.Commons;
 using FluentValidation;
 
 public class User_Register_Validator : AbstractValidator<User_Register_Request>

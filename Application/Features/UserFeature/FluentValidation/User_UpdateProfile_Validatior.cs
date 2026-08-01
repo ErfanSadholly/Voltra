@@ -1,5 +1,4 @@
 ﻿using Application.Features;
-using Application.Validation.Commons;
 using FluentValidation;
 
 public class User_UpdateProfile_Validatior : AbstractValidator<User_UpdateProfile_Request>
