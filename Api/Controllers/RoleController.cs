@@ -36,5 +36,12 @@ namespace BattryShopApi.Controllers
             var res = await _feature.Delete(roleId);
             return Ok(res);
         }
+
+        [HttpGet("[action]/{roleId}")]
+        public async Task<IActionResult> GetRoleById([FromRoute] int roleId)
+        {
+            var res = await _feature.GetRoleById(roleId);
+            return Ok(res);
+        }
     }
 }
