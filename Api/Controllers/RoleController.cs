@@ -1,10 +1,8 @@
 ﻿using Application.Features;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BattryShopApi.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RoleController : CommonController
@@ -17,16 +15,16 @@ namespace BattryShopApi.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Add([FromBody] string roleName)
+        public async Task<IActionResult> Add([FromBody] Role_Add_Request request)
         {
-            var res = await _feature.Add(roleName);
+            var res = await _feature.Add(request);
             return Ok(res);
         }
 
         [HttpPut("[action]/{roleId}")]
-        public async Task<IActionResult> Update([FromRoute] int roleId, [FromBody] string roleName)
+        public async Task<IActionResult> Update([FromRoute] int roleId, [FromBody] Role_Update_Request request)
         {
-            var res = await _feature.Update(roleId, roleName);
+            var res = await _feature.Update(roleId, request);
             return Ok(res);
         }
 

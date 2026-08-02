@@ -4,15 +4,16 @@ namespace Application.Features;
 
 public partial class RoleFeature
 {
-    public async Task<Result<bool>> Add(string roleName)
+    public async Task<Result<bool>> Add(Role_Add_Request request)
     {
-        var roleExist = await _roleManager.RoleExistsAsync(roleName);
+        var roleExist = await _roleManager.RoleExistsAsync(request.RoleName);
         if (roleExist)
             return Result<bool>.FailRes(ErrorMessages.IsExistRole);
 
         var role = new Role()
         {
-            Name = roleName.Trim(),
+            Name = request.RoleName.Trim(),
+            Description = request.Description,
         };
 
         var res = await _roleManager.CreateAsync(role);
