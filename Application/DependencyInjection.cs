@@ -10,8 +10,9 @@ public static class DependencyInjection
     {
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+        services.AddValidatorsFromAssemblyContaining<User_Register_Validator>();
         services.AddScoped<IUserFeature, UserFeature>();
         services.AddScoped<IRoleFeature, RoleFeature>();
-        services.AddValidatorsFromAssemblyContaining<User_Register_Validator>();
+        services.AddScoped<IUserRoleFeature, UserRoleFeature>();
     }
 }

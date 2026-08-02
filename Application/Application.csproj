@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\RoleFeature\Queries\" />
-    <Folder Include="Features\RoleFeature\ViewModels\Responses\" />
-    <Folder Include="Features\RoleFeature\ViewModels\Requestes\" />
+    <Folder Include="Features\UserRoleFeature\Queries\" />
+    <Folder Include="Features\UserRoleFeature\ViewModels\Responses\" />
+    <Folder Include="Features\UserRoleFeature\ViewModels\Requests\" />
   </ItemGroup>
 
 </Project>
