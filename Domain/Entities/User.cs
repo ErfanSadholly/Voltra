@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain;
 
 public class User : IdentityUser<int> , IBaseId<int>
 {
+    [MaxLength(50)]
     public required string FirstName { get; set; }
+    [MaxLength(50)]
     public required string LastName { get; set; }
     public string FullName => this.FirstName + " " + this.LastName;
     public bool IsDeleted { get; set; }
