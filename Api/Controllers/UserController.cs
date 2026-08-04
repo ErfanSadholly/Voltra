@@ -13,20 +13,6 @@ namespace BattryShopApi.Controllers
             _feature = feature;
         }
 
-        [HttpPost("[action]")]
-        public async Task<IActionResult> Register([FromBody] User_Register_Request request)
-        {
-            var res = await _feature.Register(request);
-            return Ok(res);
-        }
-
-        [HttpPost("[action]")]
-        public async Task<IActionResult> Login([FromBody] User_Login_Request request)
-        {
-            var res = await _feature.Login(request);
-            return Ok(res);
-        }
-
         [HttpPut("[action]")]
         public async Task<IActionResult> UpdateProfile([FromBody] User_UpdateProfile_Request request)
         {
