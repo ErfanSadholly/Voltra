@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain;
@@ -15,4 +17,5 @@ public class User : IdentityUser<int> , IBaseId<int>
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     public int? ModifiedBy { get; set; }
     public DateTime? ModifiedOn { get; set; }
+    public ICollection<RefreshToken> RefreshTokens { get; set; }
 }

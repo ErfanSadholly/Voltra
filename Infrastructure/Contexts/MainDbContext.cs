@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,4 +16,7 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(typeof(MainDbContext).Assembly);
     }
+
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+
 }
