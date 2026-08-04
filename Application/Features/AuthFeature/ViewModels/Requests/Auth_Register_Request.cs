@@ -1,6 +1,6 @@
 ﻿namespace Application.Features;
 
-public class User_Register_Request
+public class Auth_Register_Request
 {
     public required string FirstName { get; set; }
     public required string LastName { get; set; }

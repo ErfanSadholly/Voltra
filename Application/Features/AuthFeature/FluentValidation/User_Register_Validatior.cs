@@ -1,7 +1,7 @@
 ﻿using Application.Features;
 using FluentValidation;
 
-public class User_Register_Validator : AbstractValidator<User_Register_Request>
+public class User_Register_Validator : AbstractValidator<Auth_Register_Request>
 {
     public User_Register_Validator()
     {

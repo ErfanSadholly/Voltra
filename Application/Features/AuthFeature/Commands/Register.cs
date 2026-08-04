@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features;
 
-public partial class UserFeature
+public partial class AuthFeature
 {
-    public async Task<Result<bool>> Register(User_Register_Request request)
+    public async Task<Result<bool>> Register(Auth_Register_Request request)
     {
         var validationResult = await _registerValidator.ValidateAsync(request);
         if (!validationResult.IsValid)

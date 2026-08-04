@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Features;
 
-public partial class UserFeature
+public partial class AuthFeature
 {
     public async Task<Result<string>> Jwt(User user)
     {
@@ -15,7 +15,7 @@ public partial class UserFeature
         {
              new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
              new Claim(ClaimTypes.Name , user.FullName),
-             new Claim(ClaimTypes.MobilePhone , user.PhoneNumber),
+             new Claim(ClaimTypes.MobilePhone , user.PhoneNumber!),
              new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
         claims.AddRange(roles.Select(i => new Claim(ClaimTypes.Role, i)));
@@ -24,11 +24,11 @@ public partial class UserFeature
 
         var token = new JwtSecurityToken
         (
-             claims: claims, 
+             claims: claims,
              expires: DateTime.Now.AddHours(2),
              signingCredentials: new SigningCredentials
              (new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(secretKey!)),            
+            (Encoding.UTF8.GetBytes(secretKey!)),
             SecurityAlgorithms.HmacSha256Signature)
         );
 

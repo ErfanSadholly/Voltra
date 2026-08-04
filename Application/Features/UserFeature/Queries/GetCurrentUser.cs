@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace Application.Features;
+﻿namespace Application.Features;
 
 public partial class UserFeature
 {
@@ -14,7 +12,7 @@ public partial class UserFeature
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
-            PhoneNumber = user.PhoneNumber,
+            PhoneNumber = user.PhoneNumber!,
             Email = user.Email,
             Roles = await _userManager.GetRolesAsync(user)
         };

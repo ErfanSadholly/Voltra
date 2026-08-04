@@ -2,9 +2,9 @@
 
 namespace Application.Features;
 
-public partial class UserFeature
+public partial class AuthFeature
 {
-    public async Task<Result<string>> Login(User_Login_Request request)
+    public async Task<Result<string>> Login(Auth_Login_Request request)
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(i => i.PhoneNumber == request.PhoneNumber);
         if (user is null)
