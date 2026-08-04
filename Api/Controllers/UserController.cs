@@ -61,5 +61,12 @@ namespace BattryShopApi.Controllers
             var res = await _feature.ResetPassword(id, request);
             return Ok(res);
         }
+
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> GetUserById([FromRoute] int id)
+        {
+            var res = await _feature.GetUserById(id);
+            return Ok(res);
+        }
     }
 }
