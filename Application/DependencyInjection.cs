@@ -14,5 +14,6 @@ public static class DependencyInjection
         services.AddScoped<IUserFeature, UserFeature>();
         services.AddScoped<IRoleFeature, RoleFeature>();
         services.AddScoped<IUserRoleFeature, UserRoleFeature>();
+        services.AddScoped<IAuthFeature, AuthFeature>();
     }
 }

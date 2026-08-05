@@ -26,5 +26,12 @@ namespace BattryShopApi.Controllers
             var res = await _feature.Login(request);
             return Ok(res);
         }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> RefreshToken([FromBody] string token)
+        {
+            var res = await _feature.RefreshToken(token);
+            return Ok(res);
+        }
     }
 }

@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\AuthFeature\ViewModels\Responses\" />
     <Folder Include="Features\UserRoleFeature\Queries\" />
     <Folder Include="Features\UserRoleFeature\ViewModels\Responses\" />
     <Folder Include="Features\UserRoleFeature\ViewModels\Requests\" />

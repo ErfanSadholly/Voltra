@@ -4,20 +4,30 @@ namespace Application.Features;
 
 public partial class AuthFeature
 {
-    public async Task<Result<string>> Login(Auth_Login_Request request)
+    public async Task<Result<Auth_Login_Response>> Login(Auth_Login_Request request)
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(i => i.PhoneNumber == request.PhoneNumber);
         if (user is null)
-            return Result<string>.FailRes(ErrorMessages.UserNotFound);
+            return Result<Auth_Login_Response>.FailRes(ErrorMessages.UserNotFound);
 
         var checkPassword = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
         if (!checkPassword.Succeeded)
-            return Result<string>.FailRes("رمز عبور اشتباه است");
+            return Result<Auth_Login_Response>.FailRes("رمز عبور اشتباه است");
 
-        var token = await Jwt(user);
-        if (!token.Success || token.Data is null)
-            return Result<string>.FailRes(token.Message);
+        var accessToken = await Jwt(user);
+        if (!accessToken.Success || accessToken.Data is null)
+            return Result<Auth_Login_Response>.FailRes(accessToken.Message);
 
-        return Result<string>.SuccessRes(token.Data);
+        var refreshToken = await CreateRefreshToken(user);
+        if (!refreshToken.Success || refreshToken.Data is null)
+            return Result<Auth_Login_Response>.FailRes(refreshToken.Message);
+
+        var res = new Auth_Login_Response()
+        {
+            AccessToken = accessToken.Data,
+            RefreshToken = refreshToken.Data
+        };
+
+        return Result<Auth_Login_Response>.SuccessRes(res);
     }
 }
