@@ -11,11 +11,11 @@ public partial class AuthFeature
         return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
     }
 
-    public async Task<Result<string>> CreateRefreshToken(User user)
+    public async Task<Result<string>> CreateRefreshToken(int userId)
     {
         var refreshToken = new RefreshToken()
         {
-            UserId = user.Id,
+            UserId = userId,
             Token = GenerateRefreshToken(),
             CreatedAt = DateTime.Now,
             ExpiresAt = DateTime.Now.AddDays(7),

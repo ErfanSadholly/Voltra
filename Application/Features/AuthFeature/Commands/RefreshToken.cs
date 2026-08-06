@@ -15,7 +15,7 @@ public partial class AuthFeature
         if (!accessToken.Success || accessToken.Data is null)
             return Result<Auth_RefreshToken_Response>.FailRes(accessToken.Message);
 
-        var createRefreshToken = await CreateRefreshToken(refreshToken.User);
+        var createRefreshToken = await CreateRefreshToken(refreshToken.User.Id);
         if (!createRefreshToken.Success || createRefreshToken.Data is null)
             return Result<Auth_RefreshToken_Response>.FailRes(createRefreshToken.Message);
 
