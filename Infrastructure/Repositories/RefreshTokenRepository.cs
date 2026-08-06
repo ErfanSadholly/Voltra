@@ -17,15 +17,13 @@ public class RefreshTokenRepository : IRefreshTokenRepository
     public async Task<bool> AddAsync(RefreshToken refreshToken)
     {
         _context.RefreshTokens.Add(refreshToken);
-        await _context.SaveChangesAsync();
-        return true;
+        return await _context.SaveChangesAsync() > 0;
     }
 
     public async Task<bool> UpdateAsync(RefreshToken refreshToken)
     {
         _context.RefreshTokens.Update(refreshToken);
-        await _context.SaveChangesAsync();
-        return true;
+        return await _context.SaveChangesAsync() > 0;
     }
 
     public Task<RefreshToken?> GetRefreshTokenByToken(string token)

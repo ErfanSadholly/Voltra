@@ -6,10 +6,10 @@ public partial class AuthFeature
     {
         var refreshToken = await _repository.GetRefreshTokenByToken(token);
         if (refreshToken is null)
-            return Result<Auth_RefreshToken_Response>.FailRes(ErrorMessages.NotFound);
+            return Result<Auth_RefreshToken_Response>.FailRes(ErrorMessages.TokenNotFound);
 
         if (!refreshToken.IsActive)
-            return Result<Auth_RefreshToken_Response>.FailRes(ErrorMessages.NotFound);
+            return Result<Auth_RefreshToken_Response>.FailRes(ErrorMessages.TokenIsNotValid);
 
         var accessToken = await Jwt(refreshToken.User);
         if (!accessToken.Success || accessToken.Data is null)

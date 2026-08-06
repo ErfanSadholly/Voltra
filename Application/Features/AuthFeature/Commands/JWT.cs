@@ -25,7 +25,7 @@ public partial class AuthFeature
         var token = new JwtSecurityToken
         (
              claims: claims,
-             expires: DateTime.Now.AddHours(2),
+             expires: DateTime.Now.AddMinutes(30),
              signingCredentials: new SigningCredentials
              (new SymmetricSecurityKey
             (Encoding.UTF8.GetBytes(secretKey!)),

@@ -13,4 +13,7 @@ public static class ErrorMessages
     public const string UserNotFound = "کاربر یافت نشد";
     public const string IsExistRole = "نقش از قبل وجود دارد";
     public const string IsExistUserInRole = "کاربری از قبل در این نقش وجود دارد";
+    public const string TokenNotFound = "توکن یافت نشد";
+    public const string TokenIsNotValid = "توکن منقضی شده است";
+
 }
