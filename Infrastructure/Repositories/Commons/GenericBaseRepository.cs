@@ -1,4 +1,4 @@
-﻿using Application.Commons;
+﻿using Application.IRepositories.Common;
 using Domain;
 using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;

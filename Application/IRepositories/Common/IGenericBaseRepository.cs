@@ -1,4 +1,4 @@
-﻿namespace Application.Commons;
+﻿namespace Application.IRepositories.Common;
 
 public interface IGenericBaseRepository<TEntity, TId> where TId : struct
 {

@@ -1,9 +1,7 @@
 ﻿namespace Shared;
 
-public class Result<T>
+public class Result<T> : GeneralResponse
 {
-    public string Message { get; set; }
-    public bool Success { get; set; }
     public T? Data { get; set; }
 
     public static Result<T> SuccessRes(T data)
