@@ -54,5 +54,12 @@ namespace BattryShopApi.Controllers
             var res = await _feature.GetUserById(id);
             return Ok(res);
         }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAll([FromQuery] User_GetAll_Request request)
+        {
+            var res = await _feature.GetAll(request);
+            return Ok(res);
+        }
     }
 }

@@ -31,7 +31,7 @@ public class PagedResult<T> : GeneralResponse
         base.Message = "عملیات موفقیت آمیز بود";
     }
 
-    public static PagedResult<T> FailRes(string message)
+    public static PagedResult<T> FailRes(string message = "")
     {
         if (string.IsNullOrEmpty(message))
             return new PagedResult<T>("عملیات شکست خورد");

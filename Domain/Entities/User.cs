@@ -1,11 +1,10 @@
 ﻿using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain;
 
-public class User : IdentityUser<int> , IBaseId<int>
+public class User : IdentityUser<int>, IBaseId<int>
 {
     [MaxLength(50)]
     public required string FirstName { get; set; }
