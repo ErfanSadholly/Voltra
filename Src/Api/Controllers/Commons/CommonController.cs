@@ -9,7 +9,10 @@ public class CommonController : ControllerBase
     {
         get
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (!int.TryParse(userIdClaim, out var userId))
+                throw new UnauthorizedAccessException();
+
             return userId;
         }
     }
