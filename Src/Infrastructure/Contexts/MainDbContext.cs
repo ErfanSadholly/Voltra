@@ -19,5 +19,6 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
 
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Setting> Settings { get; set; }
+    public DbSet<ErrorLog> ErrorLogs { get; set; }
 
 }
