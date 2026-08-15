@@ -22,7 +22,7 @@ public static class DependencyInjection
         });
 
         services.AddDataProtection()
-            .PersistKeysToFileSystem(new DirectoryInfo("F:\\Web\\BattryShop\\Documents"));
+            .PersistKeysToFileSystem(new DirectoryInfo(configuration["ProtectionKey:Address"]!));
 
         services.AddHttpContextAccessor();
         services.AddScoped<IUserRepository, UserRepository>();
