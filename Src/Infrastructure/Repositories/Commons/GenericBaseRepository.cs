@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Repositories.Commons;
 
 public class GenericBaseRepository<TEntity, TId> : IGenericBaseRepository<TEntity, TId>
-    where TEntity : BaseId<TId>
+    where TEntity : BaseEntity<TId>
     where TId : struct
 {
     protected readonly MainDbContext _context;

@@ -1,7 +1,5 @@
 ﻿using Application.Features;
-using Application.IServices;
 using FluentValidation;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
@@ -18,5 +16,6 @@ public static class DependencyInjection
         services.AddScoped<IUserRoleFeature, UserRoleFeature>();
         services.AddScoped<IAuthFeature, AuthFeature>();
         services.AddScoped<ISettingFeature, SettingFeature>();
+        services.AddScoped<IProductFeature, ProductFeature>();
     }
 }
