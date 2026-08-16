@@ -6,6 +6,7 @@ public class Product_GetById_Response
     public required string Name { get; set; }
     public string? Description { get; set; }
     public int? BrandId { get; set; }
+    public string? BrandName { get; set; }  
     public bool IsActive { get; set; }
     public string CreatedBy { get; set; }
     public DateTime CreatedOn { get; set; }

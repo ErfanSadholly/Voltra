@@ -4,15 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configurations;
 
-class ProductConfiguration : IEntityTypeConfiguration<Product>
+class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {
-    public void Configure(EntityTypeBuilder<Product> builder)
+    public void Configure(EntityTypeBuilder<Brand> builder)
     {
         builder.HasKey(i => i.Id);
         builder.HasQueryFilter(i => i.IsDeleted == false);
-
-        builder.HasOne(i => i.Brand)
-            .WithMany(i => i.Products)
-            .HasForeignKey(i => i.BrandId);
     }
 }

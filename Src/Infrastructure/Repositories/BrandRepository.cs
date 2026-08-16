@@ -8,24 +8,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class ProductRepository : GenericRepository<Product, int>, IProductRepository
+public class BrandRepository : GenericRepository<Brand, int>, IBrandRepository
 {
-    public ProductRepository(MainDbContext Context) : base(Context)
+    public BrandRepository(MainDbContext Context) : base(Context)
     {
     }
 
-    public Task<Product_GetById_Response?> GetProductById(int id)
+    public Task<Brand_GetById_Response?> GetBrandById(int id)
     {
-        return _context.Products
+        return _context.Brands
             .Where(i => i.Id == id)
-            .Select(i => new Product_GetById_Response()
+            .Select(i => new Brand_GetById_Response
             {
                 Id = i.Id,
                 Name = i.Name,
-                Description = i.Description,
-                BrandId = i.BrandId,
-                BrandName = i.Brand!.Name,
-                IsActive = i.IsActive,
+                LogoUrl = i.LogoUrl,
                 CreatedBy = i.CreatedByUser!.FullName,
                 CreatedOn = i.CreatedOn,
                 ModifiedBy = i.ModifiedByUser!.FullName,
@@ -33,18 +30,12 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
             }).FirstOrDefaultAsync();
     }
 
-    public async Task<PagedResult<Product_GetAll_Response>> GetAllAsync(Product_GetAll_Request request)
+    public async Task<PagedResult<Brand_GetAll_Response>> GetAllAsync(Brand_GetAll_Request request)
     {
-        var query = _context.Products.AsQueryable();
+        var query = _context.Brands.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(request.Name))
             query = query.Where(i => i.Name.Contains(request.Name));
-
-        if (request.BrandId is not null)
-            query = query.Where(i => i.BrandId == request.BrandId);
-
-        if (!string.IsNullOrWhiteSpace(request.BrandName))
-            query = query.Where(i => i.Brand!.Name.Contains(request.BrandName));
 
         var totalCount = await query.CountAsync();
 
@@ -52,20 +43,17 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 
         query = query.UsePagination(request);
 
-        var res = await query.Select(i => new Product_GetAll_Response
+        var res = await query.Select(i => new Brand_GetAll_Response
         {
             Id = i.Id,
             Name = i.Name,
-            Description = i.Description,
-            BrandId = i.BrandId,
-            BrandName = i.Brand!.Name,
-            IsActive = i.IsActive,
+            LogoUrl = i.LogoUrl,
             CreatedBy = i.CreatedByUser!.FullName,
             CreatedOn = i.CreatedOn,
             ModifiedBy = i.ModifiedByUser!.FullName,
             ModifiedOn = i.ModifiedOn,
         }).ToListAsync();
 
-        return PagedResult<Product_GetAll_Response>.SuccessRes(res, totalCount);
+        return PagedResult<Brand_GetAll_Response>.SuccessRes(res, totalCount);
     }
 }

@@ -21,4 +21,5 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
     public DbSet<Setting> Settings { get; set; }
     public DbSet<ErrorLog> ErrorLogs { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Brand> Brands { get; set; }
 }

@@ -31,5 +31,6 @@ public static class DependencyInjection
         services.AddScoped<IDataProtectionService, DataProtectionService>();
         services.AddScoped<IErrorLogRepository, ErrorLogRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IBrandRepository, BrandRepository>();
     }
 }

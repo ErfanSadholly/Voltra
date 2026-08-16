@@ -17,5 +17,6 @@ public static class DependencyInjection
         services.AddScoped<IAuthFeature, AuthFeature>();
         services.AddScoped<ISettingFeature, SettingFeature>();
         services.AddScoped<IProductFeature, ProductFeature>();
+        services.AddScoped<IBrandFeature, BrandFeature>();
     }
 }

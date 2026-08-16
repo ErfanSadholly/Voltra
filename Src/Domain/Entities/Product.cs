@@ -10,4 +10,5 @@ public class Product : BaseEntity<int>
     public string? Description { get; set; }
     public int? BrandId { get; set; }
     public bool IsActive { get; set; }
+    public Brand? Brand { get; set; }
 }

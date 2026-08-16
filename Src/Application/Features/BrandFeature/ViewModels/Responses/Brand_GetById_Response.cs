@@ -1,13 +1,10 @@
 ﻿namespace Application.Features;
 
-public class Product_GetAll_Response
+public class Brand_GetById_Response
 {
     public int Id { get; set; }
     public string? Name { get; set; }
-    public string? Description { get; set; }
-    public int? BrandId { get; set; }
-    public string? BrandName { get; set; }
-    public bool IsActive { get; set; }
+    public string? LogoUrl { get; set; }
     public string? CreatedBy { get; set; }
     public DateTime CreatedOn { get; set; }
     public string? ModifiedBy { get; set; }
