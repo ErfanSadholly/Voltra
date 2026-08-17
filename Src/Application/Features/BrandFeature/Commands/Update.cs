@@ -8,7 +8,7 @@ public partial class BrandFeature
         if (brand is null)
             return Result<bool>.FailRes(ErrorMessages.NotFound);
 
-        brand.Name = request.Name;
+        brand.Name = request.Name.Trim();
         brand.LogoUrl = request.LogoUrl;
 
         var res = await _repository.UpdateAsync(brand, userId);

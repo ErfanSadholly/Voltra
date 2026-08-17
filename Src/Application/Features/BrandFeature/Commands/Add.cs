@@ -8,7 +8,7 @@ public partial class BrandFeature
     {
         var brand = new Brand()
         {
-            Name = request.Name,
+            Name = request.Name.Trim(),
             LogoUrl = request.LogoUrl,
         };
 
