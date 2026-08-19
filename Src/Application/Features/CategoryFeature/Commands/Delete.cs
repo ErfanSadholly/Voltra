@@ -12,6 +12,10 @@ public partial class CategoryFeature
 		if (hasChild)
 			return Result<bool>.FailRes("اجازه حذف ندارید ابتدا باید زیر شاخه هارا حذف کنید");
 
+		var hasProduct = await _productCategoryRepository.HasProducts(id);
+		if (hasProduct)
+			return Result<bool>.FailRes("از قبل محصولاتی در این دسته بندی وجود دارد");
+
 		var res = await _repository.DeleteAsync(category, userId);
 		if (!res)
 			return Result<bool>.FailRes(ErrorMessages.NotDeleted);
