@@ -1,5 +1,6 @@
 ﻿using Application.Features;
 using Application.Features.CategoryFeature;
+using Application.Features.ProductCategoryFeature;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,5 +21,7 @@ public static class DependencyInjection
 		services.AddScoped<IProductFeature, ProductFeature>();
 		services.AddScoped<IBrandFeature, BrandFeature>();
 		services.AddScoped<ICategoryFeature, CategoryFeature>();
+		services.AddScoped<IProductFeature, ProductFeature>();
+		services.AddScoped<IProductCategoryFeature, ProductCategoryFeature>();
 	}
 }

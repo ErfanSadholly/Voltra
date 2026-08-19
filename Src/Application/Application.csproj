@@ -23,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\ProductCategoryFeature\Queries\" />
+    <Folder Include="Features\ProductCategoryFeature\ViewModels\Responses\" />
     <Folder Include="Features\SettingFeature\Queries\" />
     <Folder Include="Features\SettingFeature\ViewModels\Responses\" />
     <Folder Include="Features\UserRoleFeature\Queries\" />
