@@ -5,17 +5,17 @@ using System.Security.Claims;
 [ApiController]
 public class CommonController : ControllerBase
 {
-    protected int UserId
-    {
-        get
-        {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
-                throw new UnauthorizedAccessException();
+	protected int UserId
+	{
+		get
+		{
+			int.TryParse(base.User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId);
+			if (userId <= 0)
+				throw new UnauthorizedAccessException();
 
-            return userId;
-        }
-    }
+			return userId;
+		}
+	}
 }
 #endif
 #if DEBUG
@@ -25,7 +25,6 @@ using Microsoft.AspNetCore.Mvc;
 public class CommonController : ControllerBase
 {
     protected int UserId => 1;
-    protected string? CurrentToken => "None";
 }
 
 #endif
