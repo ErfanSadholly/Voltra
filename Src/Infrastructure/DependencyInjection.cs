@@ -1,8 +1,11 @@
 ﻿using Application.IRepositories;
 using Application.IServices;
+using Audit.Core;
+using Audit.EntityFramework;
 using Infrastructure.Contexts;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Infrastructure.Services.AuditService;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +22,8 @@ public static class DependencyInjection
 			option.UseSqlServer(
 					configuration.GetConnectionString("DefaultConnection"),
 					option => option.CommandTimeout(100));
+
+			option.AddInterceptors(new AuditSaveChangesInterceptor());
 		});
 
 		services.AddDataProtection()
@@ -27,10 +32,12 @@ public static class DependencyInjection
 		services.AddHttpContextAccessor();
 
 		services.AddScoped<ICurrentUserService, CurrentUserService>();
+		services.AddScoped<IDataProtectionService, DataProtectionService>();
+		services.AddScoped<IAuditScopeFactory, CustomeAuditScopeFactory>();
+
 		services.AddScoped<IUserRepository, UserRepository>();
 		services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 		services.AddScoped<ISettingRepository, SettingRepository>();
-		services.AddScoped<IDataProtectionService, DataProtectionService>();
 		services.AddScoped<IErrorLogRepository, ErrorLogRepository>();
 		services.AddScoped<IProductRepository, ProductRepository>();
 		services.AddScoped<IBrandRepository, BrandRepository>();

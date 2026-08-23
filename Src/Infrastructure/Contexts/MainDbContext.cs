@@ -24,4 +24,5 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
 	public DbSet<Brand> Brands { get; set; }
 	public DbSet<Category> Categories { get; set; }
 	public DbSet<ProductCategory> ProductCategories { get; set; }
+	public DbSet<AuditLog> AuditLogs { get; set; }
 }

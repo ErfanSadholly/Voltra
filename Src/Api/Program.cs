@@ -2,6 +2,7 @@ using Application;
 using BattryShopApi.Exceptions;
 using BattryShopApi.Extensions;
 using Infrastructure;
+using Infrastructure.Services.AuditService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,13 +19,15 @@ builder.Services.AddJwtAuthenticationServices(builder.Configuration);
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
+AuditConfig.Configure();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 
 app.UseExceptionHandler();
