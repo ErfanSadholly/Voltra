@@ -8,14 +8,6 @@
 
 "Backend" پروژه بر پایه اصول "Clean Architecture" طراحی شده و مسئولیت‌های مختلف برنامه در لایه‌های مجزا قرار گرفته‌اند.
 
-Voltra
-├── Src
-│   ├── Domain
-│   ├── Application
-│   ├── Infrastructure
-│   └── Presentation
-│
-└── Documents
 
 تکنولوژی‌ها
 
