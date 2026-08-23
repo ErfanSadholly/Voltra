@@ -25,6 +25,8 @@ public static class DependencyInjection
 			.PersistKeysToFileSystem(new DirectoryInfo(configuration["ProtectionKey:Address"]!));
 
 		services.AddHttpContextAccessor();
+
+		services.AddScoped<ICurrentUserService, CurrentUserService>();
 		services.AddScoped<IUserRepository, UserRepository>();
 		services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 		services.AddScoped<ISettingRepository, SettingRepository>();
