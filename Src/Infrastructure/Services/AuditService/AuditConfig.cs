@@ -1,5 +1,6 @@
 ﻿using Audit.Core;
 using Domain.Entities;
+using Infrastructure.Contexts;
 using System.Text.Json;
 
 namespace Infrastructure.Services.AuditService;
@@ -16,7 +17,8 @@ public static class AuditConfig
 	{
 		Configuration
 			.Setup()
-			.UseEntityFramework(ef => ef
+			.UseEntityFramework(ef =>
+			ef.UseDbContext<MainDbContext>()
 			.AuditTypeMapper(_ => typeof(AuditLog))
 			.AuditEntityAction<AuditLog>((ev, entry, auditLog) =>
 			{
