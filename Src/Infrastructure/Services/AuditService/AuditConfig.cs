@@ -17,8 +17,7 @@ public static class AuditConfig
 	{
 		Configuration
 			.Setup()
-			.UseEntityFramework(ef =>
-			ef.UseDbContext<MainDbContext>()
+			.UseEntityFramework(ef => ef
 			.AuditTypeMapper(_ => typeof(AuditLog))
 			.AuditEntityAction<AuditLog>((ev, entry, auditLog) =>
 			{
