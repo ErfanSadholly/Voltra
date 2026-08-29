@@ -44,5 +44,6 @@ public static class DependencyInjection
 		services.AddScoped<ICategoryRepository, CategoryRepository>();
 		services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
 		services.AddScoped<AppControllerRepository>();
+		services.AddScoped<AppPermissionRepository>();
 	}
 }
