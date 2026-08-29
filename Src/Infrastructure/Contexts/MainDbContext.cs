@@ -27,4 +27,5 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
 	public DbSet<AuditLog> AuditLogs { get; set; }
 	public DbSet<ProductPrice> ProductPrices { get; set; }
 	public DbSet<AppController> AppControllers { get; set; }
+	public DbSet<AppAction> AppActions { get; set; }
 }
