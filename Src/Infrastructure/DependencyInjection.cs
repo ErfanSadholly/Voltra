@@ -37,6 +37,7 @@ public static class DependencyInjection
 		services.AddScoped<IDataProtectionService, DataProtectionService>();
 		services.AddScoped<IAuditScopeFactory, CustomeAuditScopeFactory>();
 		services.AddScoped<IPermissionSyncService, PermissionSyncService>();
+		services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 		services.AddScoped<IUserRepository, UserRepository>();
 		services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

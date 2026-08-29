@@ -22,6 +22,15 @@ builder.Services.AddProblemDetails();
 
 AuditConfig.Configure();
 
+builder.Services.AddAuthorization(options =>
+{
+	options.AddPolicy("Permission", policy =>
+	{
+		policy.RequireAuthenticatedUser();
+		policy.AddRequirements(new PermissionRequirement());
+	});
+});
+
 var app = builder.Build();
 
 await app.SyncAuthorizationAsync();
@@ -40,6 +49,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers()
+	.RequireAuthorization("Permission");
 
 app.Run();
