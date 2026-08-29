@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain;
 
-public class Role : IdentityRole<int> , IBaseId<int>
+public class Role : IdentityRole<int>, IBaseId<int>
 {
-    [MaxLength(1024)]
-    public string? Description { get; set; }    
+	[MaxLength(1024)]
+	public string? Description { get; set; }
+	public ICollection<AppRolePermission> RolePermissions { get; set; } = new List<AppRolePermission>(); 
 }
