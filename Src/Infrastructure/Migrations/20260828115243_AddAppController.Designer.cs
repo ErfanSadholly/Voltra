@@ -4,6 +4,7 @@ using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260828115243_AddAppController")]
+    partial class AddAppController
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,54 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.AppAction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ControllerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DisplayName")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedBy");
-
-                    b.HasIndex("ModifiedBy");
-
-                    b.HasIndex("ControllerId", "Name")
-                        .IsUnique()
-                        .HasFilter("[IsDeleted] = 0");
-
-                    b.ToTable("AppActions");
-                });
 
             modelBuilder.Entity("Domain.Entities.AppController", b =>
                 {
@@ -78,7 +33,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -113,94 +68,6 @@ namespace Infrastructure.Migrations
                         .HasFilter("[IsDeleted] = 0");
 
                     b.ToTable("AppControllers");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppPermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ActionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActionId")
-                        .IsUnique()
-                        .HasFilter("[IsDeleted] = 0");
-
-                    b.HasIndex("CreatedBy");
-
-                    b.HasIndex("ModifiedBy");
-
-                    b.ToTable("AppPermissions");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppRolePermission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedBy");
-
-                    b.HasIndex("ModifiedBy");
-
-                    b.HasIndex("PermissionId");
-
-                    b.HasIndex("RoleId", "PermissionId")
-                        .IsUnique()
-                        .HasFilter("[IsDeleted] = 0");
-
-                    b.ToTable("AppRolePermissions");
                 });
 
             modelBuilder.Entity("Domain.Entities.AuditLog", b =>
@@ -253,7 +120,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -294,7 +161,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -393,7 +260,7 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -442,7 +309,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -481,7 +348,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -554,7 +421,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -828,34 +695,13 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.AppAction", b =>
-                {
-                    b.HasOne("Domain.Entities.AppController", "Controller")
-                        .WithMany("Actions")
-                        .HasForeignKey("ControllerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.User", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedBy");
-
-                    b.HasOne("Domain.User", "ModifiedByUser")
-                        .WithMany()
-                        .HasForeignKey("ModifiedBy");
-
-                    b.Navigation("Controller");
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("ModifiedByUser");
-                });
-
             modelBuilder.Entity("Domain.Entities.AppController", b =>
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -864,67 +710,15 @@ namespace Infrastructure.Migrations
                     b.Navigation("CreatedByUser");
 
                     b.Navigation("ModifiedByUser");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppPermission", b =>
-                {
-                    b.HasOne("Domain.Entities.AppAction", "Action")
-                        .WithOne("Permission")
-                        .HasForeignKey("Domain.Entities.AppPermission", "ActionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.User", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedBy");
-
-                    b.HasOne("Domain.User", "ModifiedByUser")
-                        .WithMany()
-                        .HasForeignKey("ModifiedBy");
-
-                    b.Navigation("Action");
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("ModifiedByUser");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppRolePermission", b =>
-                {
-                    b.HasOne("Domain.User", "CreatedByUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedBy");
-
-                    b.HasOne("Domain.User", "ModifiedByUser")
-                        .WithMany()
-                        .HasForeignKey("ModifiedBy");
-
-                    b.HasOne("Domain.Entities.AppPermission", "Permission")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Role", "Role")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("CreatedByUser");
-
-                    b.Navigation("ModifiedByUser");
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Domain.Entities.Brand", b =>
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -939,7 +733,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -965,7 +761,9 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -982,7 +780,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -997,7 +797,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -1031,7 +833,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -1093,22 +897,6 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.AppAction", b =>
-                {
-                    b.Navigation("Permission")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppController", b =>
-                {
-                    b.Navigation("Actions");
-                });
-
-            modelBuilder.Entity("Domain.Entities.AppPermission", b =>
-                {
-                    b.Navigation("RolePermissions");
-                });
-
             modelBuilder.Entity("Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -1122,11 +910,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
                     b.Navigation("ProductPrices");
-                });
-
-            modelBuilder.Entity("Domain.Role", b =>
-                {
-                    b.Navigation("RolePermissions");
                 });
 
             modelBuilder.Entity("Domain.User", b =>

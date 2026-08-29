@@ -4,6 +4,7 @@ using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    partial class MainDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260828125203_AddAppRolePermission")]
+    partial class AddAppRolePermission
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ControllerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -78,7 +81,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -126,7 +129,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ActionId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -167,7 +170,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -253,7 +256,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -294,7 +297,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -393,7 +396,7 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -442,7 +445,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -481,7 +484,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -554,7 +557,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedBy")
+                    b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -838,7 +841,9 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -855,7 +860,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -876,7 +883,9 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -893,7 +902,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -924,7 +935,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -939,7 +952,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -965,7 +980,9 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -982,7 +999,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -997,7 +1016,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
@@ -1031,7 +1052,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
-                        .HasForeignKey("CreatedBy");
+                        .HasForeignKey("CreatedBy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.User", "ModifiedByUser")
                         .WithMany()
