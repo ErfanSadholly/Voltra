@@ -6,6 +6,8 @@ using Infrastructure.Contexts;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Infrastructure.Services.AuditService;
+using Infrastructure.Services.AuthorizationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,7 @@ public static class DependencyInjection
 		services.AddScoped<ICurrentUserService, CurrentUserService>();
 		services.AddScoped<IDataProtectionService, DataProtectionService>();
 		services.AddScoped<IAuditScopeFactory, CustomeAuditScopeFactory>();
+		services.AddScoped<IPermissionSyncService, PermissionSyncService>();
 
 		services.AddScoped<IUserRepository, UserRepository>();
 		services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

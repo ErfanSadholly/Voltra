@@ -3,6 +3,7 @@ using BattryShopApi.Exceptions;
 using BattryShopApi.Extensions;
 using Infrastructure;
 using Infrastructure.Services.AuditService;
+using Infrastructure.Services.AuthorizationService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddProblemDetails();
 AuditConfig.Configure();
 
 var app = builder.Build();
+
+await app.SyncAuthorizationAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
