@@ -7,7 +7,7 @@ public abstract class BaseEntity<TId> : BaseId<TId>
 {
     public bool IsDeleted { get; set; }
     [ForeignKey(nameof(CreatedByUser))]
-    public int CreatedBy { get; set; }
+    public int? CreatedBy { get; set; }
     public DateTime CreatedOn { get; set; } = DateTime.Now;
     [ForeignKey(nameof(ModifiedByUser))]
     public int? ModifiedBy { get; set; }
