@@ -26,7 +26,10 @@ builder.Services.AddAuthorization(options =>
 {
 	options.AddPolicy("Permission", policy =>
 	{
-		policy.RequireAuthenticatedUser();
+		if (builder.Environment.IsDevelopment() == false)
+		{
+			policy.RequireAuthenticatedUser();
+		}
 		policy.AddRequirements(new PermissionRequirement());
 	});
 });
