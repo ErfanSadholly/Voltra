@@ -23,5 +23,6 @@ public static class DependencyInjection
 		services.AddScoped<ICategoryFeature, CategoryFeature>();
 		services.AddScoped<IProductFeature, ProductFeature>();
 		services.AddScoped<IProductCategoryFeature, ProductCategoryFeature>();
+		services.AddScoped<IFileUploadFeature, FileUploadFeature>();
 	}
 }

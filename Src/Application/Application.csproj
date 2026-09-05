@@ -23,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\FileUploadFeature\Queries\" />
+    <Folder Include="Features\FileUploadFeature\ViewModels\Responses\" />
     <Folder Include="Features\ProductCategoryFeature\Queries\" />
     <Folder Include="Features\ProductCategoryFeature\ViewModels\Responses\" />
     <Folder Include="Features\SettingFeature\Queries\" />
