@@ -31,4 +31,5 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
 	public DbSet<AppPermission> AppPermissions { get; set; }
 	public DbSet<AppRolePermission> AppRolePermissions { get; set; }
 	public DbSet<FileUpload> Files { get; set; }
+	public DbSet<ProductGallery> ProductGalleries { get; set; }
 }

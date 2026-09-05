@@ -24,5 +24,6 @@ public static class DependencyInjection
 		services.AddScoped<IProductFeature, ProductFeature>();
 		services.AddScoped<IProductCategoryFeature, ProductCategoryFeature>();
 		services.AddScoped<IFileUploadFeature, FileUploadFeature>();
+		services.AddScoped<IProductGalleryFeature, ProductGalleryFeature>();
 	}
 }

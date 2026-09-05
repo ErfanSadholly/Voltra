@@ -12,4 +12,5 @@ public class Product : BaseEntity<int>
 	public bool IsActive { get; set; }
 	public Brand? Brand { get; set; }
 	public ICollection<ProductPrice> ProductPrices { get; set; } = new List<ProductPrice>();
+	public ICollection<ProductGallery> ProductGallery { get; set; } = new List<ProductGallery>();
 }
