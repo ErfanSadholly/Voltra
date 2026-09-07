@@ -19,7 +19,9 @@ public class ProductGalleryRepository : GenericRepository<ProductGallery, int>, 
 			.Where(i => i.ProductId == productId)
 			.Select(i => new ProductGallery_GetById_Response
 			{
+				Id = i.Id,
 				ProductId = i.ProductId,
+				ProductName = i.Product.Name,
 				FileId = i.FileId,
 				Order = i.Order,
 				CreatedBy = i.CreatedByUser!.FullName,
