@@ -52,5 +52,6 @@ public static class DependencyInjection
 		services.AddScoped<AppRolePermissionRepository>();
 		services.AddScoped<IFileUploadRepository, FileUploadRepository>();
 		services.AddScoped<IProductGalleryRepository, ProductGalleryRepository>();
+		services.AddScoped<IProductPropertyRepository, ProductPropertyRepository>();
 	}
 }

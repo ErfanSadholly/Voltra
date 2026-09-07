@@ -13,4 +13,5 @@ public class Product : BaseEntity<int>
 	public Brand? Brand { get; set; }
 	public ICollection<ProductPrice> ProductPrices { get; set; } = new List<ProductPrice>();
 	public ICollection<ProductGallery> ProductGallery { get; set; } = new List<ProductGallery>();
+	public ICollection<ProductProperty> ProductProperties { get; set; } = new List<ProductProperty>();
 }
