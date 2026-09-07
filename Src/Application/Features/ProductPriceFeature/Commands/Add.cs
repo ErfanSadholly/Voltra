@@ -6,6 +6,10 @@ public partial class ProductPriceFeature
 {
 	public async Task<Result<bool>> AddAsync(ProductPrice_Add_Request request, int userId)
 	{
+		var product = await _productRepository.GetByIdAsync(request.ProductId);
+		if (product == null)
+			return Result<bool>.FailRes(ErrorMessages.ProductNotFound);
+
 		var productPrice = new ProductPrice()
 		{
 			ProductId = request.ProductId,

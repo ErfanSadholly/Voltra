@@ -8,7 +8,7 @@ public partial class ProductPropertyFeature
 	{
 		var product = await _productRepository.GetByIdAsync(request.ProductId);
 		if (product is null)
-			return Result<bool>.FailRes(ErrorMessages.NotFound);
+			return Result<bool>.FailRes(ErrorMessages.ProductNotFound);
 
 		var property = new ProductProperty
 		{

@@ -8,7 +8,7 @@ public partial class ProductGalleryFeature
 	{
 		var product = await _productRepository.GetByIdAsync(request.ProductId);
 		if (product is null)
-			return Result<bool>.FailRes(ErrorMessages.NotFound);
+			return Result<bool>.FailRes(ErrorMessages.ProductNotFound);
 
 		var file = await _fileUploadRepository.GetByIdAsync(request.FileId);
 		if (file is null)

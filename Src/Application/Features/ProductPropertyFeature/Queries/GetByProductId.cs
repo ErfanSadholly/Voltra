@@ -6,7 +6,7 @@ public partial class ProductPropertyFeature
 	{
 		var product = await _productRepository.GetByIdAsync(productId);
 		if (product == null)
-			return Result<List<ProductProperty_GetByProductId_Response>>.FailRes(ErrorMessages.NotFound);
+			return Result<List<ProductProperty_GetByProductId_Response>>.FailRes(ErrorMessages.ProductNotFound);
 
 		var res = await _repository.GetByProductId(productId);
 

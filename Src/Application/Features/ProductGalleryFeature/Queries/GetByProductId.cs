@@ -6,7 +6,7 @@ public partial class ProductGalleryFeature
 	{
 		var product = await _productRepository.GetByIdAsync(productId);
 		if (product == null)
-			return Result<List<ProductGallery_GetById_Response>>.FailRes(ErrorMessages.NotFound);
+			return Result<List<ProductGallery_GetById_Response>>.FailRes(ErrorMessages.ProductNotFound);
 
 		var productGallery = await _repository.GetByProductId(productId);
 		return Result<List<ProductGallery_GetById_Response>>.SuccessRes(productGallery);
