@@ -18,11 +18,12 @@ public static class AuditConfig
 		Configuration
 			.Setup()
 			.UseEntityFramework(ef => ef
+			.UseDbContext<MainDbContext>()
 			.AuditTypeMapper(_ => typeof(AuditLog))
 			.AuditEntityAction<AuditLog>((ev, entry, auditLog) =>
 			{
 				auditLog.EntityName = entry.EntityType.Name;
-				auditLog.EntityId = entry.PrimaryKey.First().Value?.ToString() ?? string.Empty;
+				auditLog.EntityId = entry.PrimaryKey.FirstOrDefault().Value?.ToString() ?? string.Empty;
 				auditLog.Action = entry.Action;
 				auditLog.CreatedOn = DateTime.Now;
 				if (ev.CustomFields.TryGetValue("UserId", out var value) == true)

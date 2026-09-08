@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Audit.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities;
 
+[AuditIgnore]
 public class ErrorLog : BaseId<long>
 {
     [MaxLength(512)]

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts;
 
-public class MainDbContext : IdentityDbContext<User, Role, int>
+public class MainDbContext : IdentityDbContext<User, Role, int>, IAuditBypass
 {
 	public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
 	{
@@ -15,6 +15,16 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
 	{
 		base.OnModelCreating(builder);
 		builder.ApplyConfigurationsFromAssembly(typeof(MainDbContext).Assembly);
+	}
+
+	public int SaveChangesBypassAudit()
+	{
+		return base.SaveChanges();
+	}
+
+	public Task<int> SaveChangesBypassAuditAsync(CancellationToken cancellationToken = default)
+	{
+		return base.SaveChangesAsync(cancellationToken);
 	}
 
 	public DbSet<RefreshToken> RefreshTokens { get; set; }
