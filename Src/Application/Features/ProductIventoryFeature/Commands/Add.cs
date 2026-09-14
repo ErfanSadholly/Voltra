@@ -1,0 +1,29 @@
+﻿using Domain.Entities;
+
+namespace Application.Features;
+
+public partial class ProductIventoryFeature
+{
+	public async Task<Result<bool>> AddAsync(ProductIventory_Add_Request request, int userId)
+	{
+		var product = await _productRepository.GetByIdAsync(request.ProductId);
+		if (product == null)
+			return Result<bool>.FailRes(ErrorMessages.ProductNotFound);
+
+		var isExistIvemtory = await _repository.IsExistIventoryByProductId(product.Id);
+		if (isExistIvemtory)
+			return Result<bool>.FailRes(ErrorMessages.IsExistKey);
+
+		var iventory = new ProductIventory
+		{
+			ProductId = request.ProductId,
+			Quantity = request.Quantity,
+		};
+
+		var res = await _repository.AddAsync(iventory, userId);
+		if (!res)
+			return Result<bool>.FailRes(ErrorMessages.NotAdded);
+
+		return Result<bool>.SuccessRes(true);
+	}
+}
