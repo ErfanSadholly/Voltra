@@ -33,5 +33,5 @@ public class MainDbContext : IdentityDbContext<User, Role, int>
 	public DbSet<FileUpload> Files { get; set; }
 	public DbSet<ProductGallery> ProductGalleries { get; set; }
 	public DbSet<ProductProperty> ProductProperties { get; set; }
-	public DbSet<ProductIventory> ProductIventories { get; set; }
+	public DbSet<ProductInventory> ProductInventories { get; set; }
 }

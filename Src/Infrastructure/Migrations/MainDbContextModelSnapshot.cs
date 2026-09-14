@@ -567,7 +567,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProductGalleries");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ProductIventory", b =>
+            modelBuilder.Entity("Domain.Entities.ProductInventory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1221,7 +1221,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ProductIventory", b =>
+            modelBuilder.Entity("Domain.Entities.ProductInventory", b =>
                 {
                     b.HasOne("Domain.User", "CreatedByUser")
                         .WithMany()
@@ -1232,8 +1232,8 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("ModifiedBy");
 
                     b.HasOne("Domain.Entities.Product", "Product")
-                        .WithOne("ProductIventory")
-                        .HasForeignKey("Domain.Entities.ProductIventory", "ProductId")
+                        .WithOne("ProductInventory")
+                        .HasForeignKey("Domain.Entities.ProductInventory", "ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1397,7 +1397,7 @@ namespace Infrastructure.Migrations
                 {
                     b.Navigation("ProductGallery");
 
-                    b.Navigation("ProductIventory")
+                    b.Navigation("ProductInventory")
                         .IsRequired();
 
                     b.Navigation("ProductPrices");

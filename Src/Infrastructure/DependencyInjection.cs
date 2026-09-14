@@ -50,6 +50,6 @@ public static class DependencyInjection
 		services.AddScoped<IFileUploadRepository, FileUploadRepository>();
 		services.AddScoped<IProductGalleryRepository, ProductGalleryRepository>();
 		services.AddScoped<IProductPropertyRepository, ProductPropertyRepository>();
-		services.AddScoped<IProductIventoryRepository, ProductIventoryRepository>();
+		services.AddScoped<IProductInventoryRepository, ProductInventoryRepository>();
 	}
 }

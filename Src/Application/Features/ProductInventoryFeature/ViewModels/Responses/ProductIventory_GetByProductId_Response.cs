@@ -1,6 +1,6 @@
 ﻿namespace Application.Features;
 
-public class ProductIventory_GetByProductId_Response
+public class ProductInventory_GetByProductId_Response
 {
 	public int Id { get; set; }
 	public int ProductId { get; set; }

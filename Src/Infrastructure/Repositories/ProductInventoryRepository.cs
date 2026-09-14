@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class ProductIventoryRepository : GenericRepository<ProductIventory, int>, IProductIventoryRepository
+public class ProductInventoryRepository : GenericRepository<ProductInventory, int>, IProductInventoryRepository
 {
-	public ProductIventoryRepository(MainDbContext Context) : base(Context)
+	public ProductInventoryRepository(MainDbContext Context) : base(Context)
 	{
 	}
 
-	public Task<ProductIventory_GetByProductId_Response?> GetByProductId(int productId)
+	public Task<ProductInventory_GetByProductId_Response?> GetByProductId(int productId)
 	{
-		return _context.ProductIventories
+		return _context.ProductInventories
 			.Where(i => i.ProductId == productId)
-			.Select(i => new ProductIventory_GetByProductId_Response
+			.Select(i => new ProductInventory_GetByProductId_Response
 			{
 				Id = i.Id,
 				ProductId = i.ProductId,
@@ -30,8 +30,8 @@ public class ProductIventoryRepository : GenericRepository<ProductIventory, int>
 			}).SingleOrDefaultAsync();
 	}
 
-	public Task<bool> IsExistIventoryByProductId(int productId)
+	public Task<bool> IsExistInventoryByProductId(int productId)
 	{
-		return _context.ProductIventories.AnyAsync(i => i.ProductId == productId);
+		return _context.ProductInventories.AnyAsync(i => i.ProductId == productId);
 	}
 }

@@ -4,8 +4,8 @@ using Domain.Entities;
 
 namespace Application.IRepositories;
 
-public interface IProductIventoryRepository : IGenericRepository<ProductIventory, int>
+public interface IProductInventoryRepository : IGenericRepository<ProductInventory, int>
 {
-	Task<ProductIventory_GetByProductId_Response?> GetByProductId(int productId);
-	Task<bool> IsExistIventoryByProductId(int productId);
+	Task<ProductInventory_GetByProductId_Response?> GetByProductId(int productId);
+	Task<bool> IsExistInventoryByProductId(int productId);
 }

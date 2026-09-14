@@ -5,24 +5,24 @@ namespace BattryShopApi.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
-	public class ProductIventoryController : CommonController
+	public class ProductInventoryController : CommonController
 	{
-		private readonly IProductIventoryFeature _feature;
+		private readonly IProductInventoryFeature _feature;
 
-		public ProductIventoryController(IProductIventoryFeature feature)
+		public ProductInventoryController(IProductInventoryFeature feature)
 		{
 			_feature = feature;
 		}
 
 		[HttpPost("[action]")]
-		public async Task<IActionResult> Add([FromBody] ProductIventory_Add_Request request)
+		public async Task<IActionResult> Add([FromBody] ProductInventory_Add_Request request)
 		{
 			var res = await _feature.AddAsync(request, base.UserId);
 			return Ok(res);
 		}
 
 		[HttpPut("[action]/{id}")]
-		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] ProductIventory_Update_Request request)
+		public async Task<IActionResult> Update([FromRoute] int id, [FromBody] ProductInventory_Update_Request request)
 		{
 			var res = await _feature.UpdateAsync(id, request, base.UserId);
 			return Ok(res);

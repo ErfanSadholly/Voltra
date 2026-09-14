@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configurations;
 
-class ProductIventoryConfiguration : IEntityTypeConfiguration<ProductIventory>
+class ProductInventoryConfiguration : IEntityTypeConfiguration<ProductInventory>
 {
-	public void Configure(EntityTypeBuilder<ProductIventory> builder)
+	public void Configure(EntityTypeBuilder<ProductInventory> builder)
 	{
 		builder.HasKey(x => x.Id);
 		builder.HasQueryFilter(i => i.IsDeleted == false);
 
 		builder.HasOne(i => i.Product)
-			.WithOne(i => i.ProductIventory)
-			.HasForeignKey<ProductIventory>(i => i.ProductId)
+			.WithOne(i => i.ProductInventory)
+			.HasForeignKey<ProductInventory>(i => i.ProductId)
 			.OnDelete(DeleteBehavior.Restrict);
 	}
 }

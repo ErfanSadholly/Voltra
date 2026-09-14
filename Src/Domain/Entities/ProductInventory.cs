@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities;
 
-public class ProductIventory : BaseEntity<int>
+public class ProductInventory : BaseEntity<int>
 {
 	public int ProductId { get; set; }
 	public int Quantity { get; set; }	
