@@ -1,9 +1,7 @@
-﻿using Audit.EntityFramework;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities;
 
-[AuditIgnore]
 public class AuditLog
 {
 	public long Id { get; set; }
@@ -11,7 +9,7 @@ public class AuditLog
 	[MaxLength(512)]
 	public required string EntityName { get; set; }
 	[MaxLength(128)]
-	public required string EntityId { get; set; }
+	public string? EntityId { get; set; }
 	[MaxLength(10)]
 	public required string Action { get; set; }
 	[MaxLength(4000)]

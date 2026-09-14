@@ -1,11 +1,8 @@
 ﻿using Application.IRepositories;
 using Application.IServices;
-using Audit.Core;
-using Audit.EntityFramework;
 using Infrastructure.Contexts;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
-using Infrastructure.Services.AuditService;
 using Infrastructure.Services.AuthorizationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
@@ -19,13 +16,13 @@ public static class DependencyInjection
 {
 	public static void ConfigureInfrastructure(this IServiceCollection services, IConfiguration configuration)
 	{
-		services.AddDbContext<MainDbContext>(option =>
+		services.AddDbContext<MainDbContext>((provider, option) =>
 		{
 			option.UseSqlServer(
 					configuration.GetConnectionString("DefaultConnection"),
 					option => option.CommandTimeout(100));
 
-			option.AddInterceptors(new AuditSaveChangesInterceptor());
+			option.AddInterceptors(provider.GetRequiredService<AuditSaveChangesInterceptor>());
 		});
 
 		services.AddDataProtection()
@@ -35,7 +32,7 @@ public static class DependencyInjection
 
 		services.AddScoped<ICurrentUserService, CurrentUserService>();
 		services.AddScoped<IDataProtectionService, DataProtectionService>();
-		services.AddScoped<IAuditScopeFactory, CustomeAuditScopeFactory>();
+		services.AddScoped<AuditSaveChangesInterceptor>();
 		services.AddScoped<IPermissionSyncService, PermissionSyncService>();
 		services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 

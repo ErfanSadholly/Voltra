@@ -2,7 +2,6 @@ using Application;
 using BattryShopApi.Exceptions;
 using BattryShopApi.Extensions;
 using Infrastructure;
-using Infrastructure.Services.AuditService;
 using Infrastructure.Services.AuthorizationService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +19,6 @@ builder.Services.AddJwtAuthenticationServices(builder.Configuration);
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
 
-AuditConfig.Configure();
 
 builder.Services.AddAuthorization(options =>
 {
