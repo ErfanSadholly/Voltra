@@ -3,6 +3,7 @@ using BattryShopApi.Exceptions;
 using BattryShopApi.Extensions;
 using Infrastructure;
 using Infrastructure.Services.AuthorizationService;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,18 @@ builder.Services.AddAuthorization(options =>
 	});
 });
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("front", policy =>
+	{
+		policy
+			.WithOrigins("http://localhost:3000")
+			.AllowAnyHeader()
+			.AllowAnyMethod()
+			.AllowCredentials();
+	});
+});
+
 var app = builder.Build();
 
 await app.SyncAuthorizationAsync();
@@ -46,6 +59,8 @@ if (app.Environment.IsDevelopment())
 app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
+
+app.UseCors("front");
 
 app.UseAuthentication();
 app.UseAuthorization();
