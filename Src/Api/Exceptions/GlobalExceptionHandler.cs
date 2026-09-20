@@ -49,8 +49,8 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
 		httpContext.Response.ContentType = "application/json";
 
 		var message = errorId.HasValue
-			? $"خطای غیرمنتظره ای رخ داد! کد خطا : {errorId}"
-			: "خطای غیرمنتطره ای رخ داد";
+			? $"خطای غیرمنتظره‌ای رخ داد.\nکد خطا: {errorId}\nلطفاً این کد را به پشتیبانی اعلام کنید."
+			: "خطای غیرمنتظره‌ای رخ داد. لطفاً با پشتیبانی تماس بگیرید.";
 		var res = Result<long>.FailRes(message);
 		await httpContext.Response.WriteAsJsonAsync(res, cancellationToken);
 
