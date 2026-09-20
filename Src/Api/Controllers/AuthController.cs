@@ -49,10 +49,31 @@ namespace BattryShopApi.Controllers
 		}
 
 		[HttpPost("[action]")]
-		public async Task<IActionResult> RefreshToken([FromBody] string token)
+		public async Task<IActionResult> RefreshToken()
 		{
+			var token = Request.Cookies[RefreshTokenCookie];
+
+			if (string.IsNullOrEmpty(token))
+				return Ok(Result<Auth_RefreshToken_Response>.FailRes(ErrorMessages.TokenNotFound));
+
 			var res = await _feature.RefreshToken(token);
-			return Ok(res);
+			if (!res.Success || res.Data is null)
+				return Ok(Result<Auth_RefreshToken_Response>.FailRes(res.Message));
+
+			Response.Cookies.Append(RefreshTokenCookie, res.Data.RefreshToken, new CookieOptions
+			{
+				HttpOnly = true,
+				Secure = true,
+				SameSite = SameSiteMode.Strict,
+				Expires = DateTime.UtcNow.AddDays(7)
+			});
+
+			var response = new Auth_RefreshToken_Response
+			{
+				AccessToken = res.Data.AccessToken
+			};
+
+			return Ok(Result<Auth_RefreshToken_Response>.SuccessRes(response));
 		}
 
 		[HttpPost("[action]")]
