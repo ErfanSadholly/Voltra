@@ -27,5 +27,6 @@ public static class DependencyInjection
 		services.AddScoped<IProductGalleryFeature, ProductGalleryFeature>();
 		services.AddScoped<IProductPropertyFeature, ProductPropertyFeature>();
 		services.AddScoped<IProductInventoryFeature, ProductInventoryFeature>();
+		services.AddScoped<IErrorLogFeature, ErrorLogFeature>();
 	}
 }
