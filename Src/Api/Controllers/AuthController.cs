@@ -1,4 +1,5 @@
-﻿using Application.Features;
+﻿using Application.Constants;
+using Application.Features;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
@@ -11,7 +12,6 @@ namespace BattryShopApi.Controllers
 	public class AuthController : CommonController
 	{
 		private readonly IAuthFeature _feature;
-		private const string RefreshTokenCookie = "refreshToken";
 
 		public AuthController(IAuthFeature authFeature)
 		{
@@ -32,7 +32,7 @@ namespace BattryShopApi.Controllers
 			if (!res.Success)
 				return Ok(res);
 
-			Response.Cookies.Append(RefreshTokenCookie, res.Data.RefreshToken, new CookieOptions
+			Response.Cookies.Append(AuthConstants.RefreshTokenCookie, res.Data.RefreshToken, new CookieOptions
 			{
 				HttpOnly = true,
 				Secure = true,
@@ -51,7 +51,7 @@ namespace BattryShopApi.Controllers
 		[HttpPost("[action]")]
 		public async Task<IActionResult> RefreshToken()
 		{
-			var token = Request.Cookies[RefreshTokenCookie];
+			var token = Request.Cookies[AuthConstants.RefreshTokenCookie];
 
 			if (string.IsNullOrEmpty(token))
 				return Ok(Result<Auth_RefreshToken_Response>.FailRes(ErrorMessages.TokenNotFound));
@@ -60,7 +60,7 @@ namespace BattryShopApi.Controllers
 			if (!res.Success || res.Data is null)
 				return Ok(Result<Auth_RefreshToken_Response>.FailRes(res.Message));
 
-			Response.Cookies.Append(RefreshTokenCookie, res.Data.RefreshToken, new CookieOptions
+			Response.Cookies.Append(AuthConstants.RefreshTokenCookie, res.Data.RefreshToken, new CookieOptions
 			{
 				HttpOnly = true,
 				Secure = true,

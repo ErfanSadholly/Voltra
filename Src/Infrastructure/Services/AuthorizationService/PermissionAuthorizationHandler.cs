@@ -11,14 +11,14 @@ public sealed class PermissionAuthorizationHandler : AuthorizationHandler<Permis
 {
 	private readonly AppPermissionRepository _permissionRepository;
 	private readonly AppRolePermissionRepository _rolePermissionRepository;
-	private readonly ICurrentUserService _currentUser;
+	private readonly IHttpContextService _httpContextService;
 	private readonly IHostEnvironment _environment;
 
-	public PermissionAuthorizationHandler(AppPermissionRepository permissionRepository, AppRolePermissionRepository rolePermissionRepository, ICurrentUserService currentUser, IHostEnvironment environment)
+	public PermissionAuthorizationHandler(AppPermissionRepository permissionRepository, AppRolePermissionRepository rolePermissionRepository, IHttpContextService httpContextService, IHostEnvironment environment)
 	{
 		_permissionRepository = permissionRepository;
 		_rolePermissionRepository = rolePermissionRepository;
-		_currentUser = currentUser;
+		_httpContextService = httpContextService;
 		_environment = environment;
 	}
 
@@ -44,7 +44,7 @@ public sealed class PermissionAuthorizationHandler : AuthorizationHandler<Permis
 		if (permission is null)
 			return;
 
-		var userId = _currentUser.GetUserId();
+		var userId = _httpContextService.GetUserId();
 		if (userId.HasValue == false)
 			return;
 

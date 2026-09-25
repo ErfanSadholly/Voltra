@@ -8,11 +8,11 @@ namespace Infrastructure.Services;
 
 public class AuditSaveChangesInterceptor : SaveChangesInterceptor
 {
-	private readonly ICurrentUserService _currentUser;
+	private readonly IHttpContextService _httpContextService;
 
-	public AuditSaveChangesInterceptor(ICurrentUserService currentUser)
+	public AuditSaveChangesInterceptor(IHttpContextService httpContextService)
 	{
-		_currentUser = currentUser;
+		_httpContextService = httpContextService;
 	}
 
 	public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
@@ -40,7 +40,7 @@ public class AuditSaveChangesInterceptor : SaveChangesInterceptor
 			{
 				Action = string.Empty,
 				EntityName = entry.Metadata.ClrType.Name,
-				UserId = _currentUser.GetUserId(),
+				UserId = _httpContextService.GetUserId(),
 				CreatedOn = DateTime.Now,
 			};
 

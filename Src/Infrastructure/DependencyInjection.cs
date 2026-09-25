@@ -30,7 +30,7 @@ public static class DependencyInjection
 
 		services.AddHttpContextAccessor();
 
-		services.AddScoped<ICurrentUserService, CurrentUserService>();
+		services.AddScoped<IHttpContextService, HttpContextService>();
 		services.AddScoped<IDataProtectionService, DataProtectionService>();
 		services.AddScoped<AuditSaveChangesInterceptor>();
 		services.AddScoped<IPermissionSyncService, PermissionSyncService>();
