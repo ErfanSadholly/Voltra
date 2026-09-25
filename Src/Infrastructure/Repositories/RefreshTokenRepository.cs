@@ -7,29 +7,34 @@ namespace Infrastructure.Repositories;
 
 public class RefreshTokenRepository : IRefreshTokenRepository
 {
-    private readonly MainDbContext _context;
+	private readonly MainDbContext _context;
 
-    public RefreshTokenRepository(MainDbContext dbContext)
-    {
-        _context = dbContext;
-    }
+	public RefreshTokenRepository(MainDbContext dbContext)
+	{
+		_context = dbContext;
+	}
 
-    public async Task<bool> AddAsync(RefreshToken refreshToken)
-    {
-        _context.RefreshTokens.Add(refreshToken);
-        return await _context.SaveChangesAsync() > 0;
-    }
+	public async Task<bool> AddAsync(RefreshToken refreshToken)
+	{
+		_context.RefreshTokens.Add(refreshToken);
+		return await _context.SaveChangesAsync() > 0;
+	}
 
-    public async Task<bool> UpdateAsync(RefreshToken refreshToken)
-    {
-        _context.RefreshTokens.Update(refreshToken);
-        return await _context.SaveChangesAsync() > 0;
-    }
+	public async Task<bool> UpdateAsync(RefreshToken refreshToken)
+	{
+		_context.RefreshTokens.Update(refreshToken);
+		return await _context.SaveChangesAsync() > 0;
+	}
 
-    public Task<RefreshToken?> GetRefreshTokenByToken(string token)
-    {
-        return _context.RefreshTokens
-            .Include(i => i.User)
-            .FirstOrDefaultAsync(i => i.Token == token);
-    }
+	public Task<RefreshToken?> GetRefreshTokenByToken(string token)
+	{
+		return _context.RefreshTokens
+			.Include(i => i.User)
+			.FirstOrDefaultAsync(i => i.Token == token);
+	}
+
+	public Task<RefreshToken?> GetRefreshToken(int userId, string token)
+	{
+		return _context.RefreshTokens.FirstOrDefaultAsync(i => i.UserId == userId && i.Token == token);
+	}
 }

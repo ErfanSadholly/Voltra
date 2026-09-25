@@ -77,9 +77,9 @@ namespace BattryShopApi.Controllers
 		}
 
 		[HttpPost("[action]")]
-		public async Task<IActionResult> Logout([FromBody] string token)
+		public async Task<IActionResult> Logout()
 		{
-			var res = await _feature.Logout(token);
+			var res = await _feature.Logout();
 			return Ok(res);
 		}
 	}

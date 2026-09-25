@@ -2,20 +2,28 @@
 
 public partial class AuthFeature
 {
-    public async Task<Result<bool>> Logout(string token)
-    {
-        var refreshToken = await _repository.GetRefreshTokenByToken(token);
-        if (refreshToken is null)
-            return Result<bool>.FailRes(ErrorMessages.TokenNotFound);
+	public async Task<Result<bool>> Logout()
+	{
+		var userId = _currentUserService.GetUserId();
+		if (userId == null)
+			return Result<bool>.FailRes(ErrorMessages.UserNotFound);
 
-        if (!refreshToken.IsActive)
-            return Result<bool>.FailRes(ErrorMessages.TokenIsNotValid);
+		var token = _httpContextAccessor.HttpContext?.Request.Cookies["refreshToken"];
+		if (string.IsNullOrWhiteSpace(token))
+			return Result<bool>.FailRes("رفرش توکن یافت نشد");
 
-        refreshToken.RevokedAt = DateTime.Now;
-        var update = await _repository.UpdateAsync(refreshToken);
-        if (!update)
-            return Result<bool>.FailRes(ErrorMessages.NotUpdated);
+		var refreshToken = await _repository.GetRefreshToken(userId.Value, token);
+		if (refreshToken is null)
+			return Result<bool>.FailRes(ErrorMessages.TokenNotFound);
 
-        return Result<bool>.SuccessRes(true);
-    }
+		if (!refreshToken.IsActive)
+			return Result<bool>.FailRes(ErrorMessages.TokenIsNotValid);
+
+		refreshToken.RevokedAt = DateTime.Now;
+		var update = await _repository.UpdateAsync(refreshToken);
+		if (!update)
+			return Result<bool>.FailRes(ErrorMessages.NotUpdated);
+
+		return Result<bool>.SuccessRes(true);
+	}
 }
