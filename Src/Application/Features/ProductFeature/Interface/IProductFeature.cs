@@ -7,4 +7,5 @@ public interface IProductFeature
     Task<Result<bool>> Delete(int id, int userId);
     Task<Result<Product_GetById_Response>> GetProductById(int id);
     Task<PagedResult<Product_GetAll_Response>> GetAll(Product_GetAll_Request request);
+	Task<Result<Product_GetDetails_Response>> GetDetails(int productId);
 }
