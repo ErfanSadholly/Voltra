@@ -43,9 +43,6 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 		if (request.BrandId is not null)
 			query = query.Where(i => i.BrandId == request.BrandId);
 
-		if (!string.IsNullOrWhiteSpace(request.BrandName))
-			query = query.Where(i => i.Brand!.Name.Contains(request.BrandName));
-
 		var totalCount = await query.CountAsync();
 
 		query = query.OrderByDescending(i => i.CreatedOn);
