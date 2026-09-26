@@ -1,4 +1,5 @@
-﻿using Application.IRepositories;
+﻿using Application.Features;
+using Application.IRepositories;
 using Domain.Entities;
 using Infrastructure.Contexts;
 using Infrastructure.Repositories.Commons;
@@ -20,5 +21,21 @@ public class ProductCategoryRepository : GenericRepository<ProductCategory, int>
 	public Task<bool> HasProducts(int categoryId)
 	{
 		return _context.ProductCategories.AnyAsync(i => i.CategoryId == categoryId);
+	}
+
+	public Task<List<ProductCategory_GetByProductId_Response>> GetByProductId(int productId)
+	{
+		return _context.ProductCategories
+			.Where(i => i.ProductId == productId)
+			.Select(i => new ProductCategory_GetByProductId_Response
+			{
+				Id = i.Id,
+				CategoryId = i.CategoryId,
+				CategoryName = i.Category.Name,
+				CreatedBy = i.CreatedByUser!.FullName,
+				CreatedOn = i.CreatedOn,
+				ModifiedBy = i.ModifiedByUser!.FullName,
+				ModifiedOn = i.ModifiedOn
+			}).ToListAsync();
 	}
 }

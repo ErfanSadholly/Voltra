@@ -27,5 +27,12 @@ namespace BattryShopApi.Controllers
 			var res = await _feature.DeleteAsync(id, base.UserId);
 			return Ok(res);
 		}
+
+		[HttpGet("[action]/{productId}")]
+		public async Task<IActionResult> GetByProductId([FromRoute] int productId)
+		{
+			var res = await _feature.GetByProductId(productId);
+			return Ok(res);
+		}
 	}
 }
