@@ -56,6 +56,7 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 			Description = i.Description,
 			BrandId = i.BrandId,
 			BrandName = i.Brand!.Name,
+			FileIds = i.ProductGallery.Select(i => i.FileId).ToList(),
 			IsActive = i.IsActive,
 			CreatedBy = i.CreatedByUser!.FullName,
 			CreatedOn = i.CreatedOn,
@@ -72,7 +73,7 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 			.Where(i => i.Id == productId)
 			.Select(i => new Product_GetDetails_Response
 			{
-				Products = new Product_GetAll_Response
+				Product = new Product_GetAll_Response
 				{
 					Id = productId,
 					Name = i.Name,
@@ -99,7 +100,8 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 					ModifiedOn = pg.ModifiedOn,
 				}).ToList(),
 
-				ProductInventory = new ProductInventory_GetByProductId_Response
+				ProductInventory = i.ProductInventory == null ? null
+				: new ProductInventory_GetByProductId_Response
 				{
 					Id = i.ProductInventory.Id,
 					ProductId = productId,
