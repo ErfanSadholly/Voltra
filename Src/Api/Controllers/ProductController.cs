@@ -55,5 +55,12 @@ namespace BattryShopApi.Controllers
 			var res = await _feature.GetDetails(productId);
 			return Ok(res);
 		}
+
+		[HttpPut("[action]/{productId}")]
+		public async Task<IActionResult> UpdateActiveStatus([FromRoute] int productId, [FromBody] bool isActive)
+		{
+			var res = await _feature.UpdateActiveStatus(isActive, productId, base.UserId);
+			return Ok(res);
+		}
 	}
 }

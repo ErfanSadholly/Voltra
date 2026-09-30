@@ -11,7 +11,6 @@ public partial class ProductFeature
             Name = request.Name,
             Description = request.Description,
             BrandId = request.BrandId,
-            IsActive = request.IsActive,
         };
 
         var res = await _repository.AddAsync(product, userId);
