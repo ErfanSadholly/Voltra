@@ -43,6 +43,26 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 		if (request.BrandId is not null)
 			query = query.Where(i => i.BrandId == request.BrandId);
 
+		if (request.CreatedBy is not null)
+			query = query.Where(i => i.CreatedBy == request.CreatedBy);
+
+		if (request.ModifiedBy is not null)
+			query = query.Where(i => i.ModifiedBy == request.ModifiedBy);
+
+		if (request.CreatedOn.HasValue)
+		{
+			query = query.Where(x =>
+			x.CreatedOn >= request.CreatedOn.Value.WithMinTime() &&
+			x.CreatedOn <= request.CreatedOn.Value.WithMaxTime());
+		}
+
+		if (request.ModifiedOn.HasValue)
+		{
+			query = query.Where(x =>
+			x.ModifiedOn >= request.ModifiedOn.Value.WithMinTime() &&
+			x.ModifiedOn <= request.ModifiedOn.Value.WithMaxTime());
+		}
+
 		var totalCount = await query.CountAsync();
 
 		query = query.OrderByDescending(i => i.CreatedOn);
