@@ -12,9 +12,7 @@ public class AuditLog
 	public string? EntityId { get; set; }
 	[MaxLength(10)]
 	public required string Action { get; set; }
-	[MaxLength(4000)]
 	public string? OldValue { get; set; }
-	[MaxLength(4000)]
 	public string? NewValue { get; set; }
 	public DateTime CreatedOn { get; set; }
 }
