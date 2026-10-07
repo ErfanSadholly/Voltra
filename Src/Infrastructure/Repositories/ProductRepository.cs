@@ -49,7 +49,7 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 		if (request.ModifiedBy is not null)
 			query = query.Where(i => i.ModifiedBy == request.ModifiedBy);
 
-		if (request.CreatedOn.HasValue)
+		if (request.CreatedOn.HasValue)	
 		{
 			query = query.Where(x =>
 			x.CreatedOn >= request.CreatedOn.Value.WithMinTime() &&
@@ -65,7 +65,31 @@ public class ProductRepository : GenericRepository<Product, int>, IProductReposi
 
 		var totalCount = await query.CountAsync();
 
-		query = query.OrderByDescending(i => i.CreatedOn);
+
+		query = request.SortBy switch
+		{
+			"name" => request.Desc
+				? query.OrderByDescending(x => x.Name)
+				: query.OrderBy(x => x.Name),
+
+			"brandId" => request.Desc
+				? query.OrderByDescending(x => x.Brand!.Name)
+				: query.OrderBy(x => x.Brand!.Name),
+
+			"isActive" => request.Desc
+				? query.OrderByDescending(x => x.IsActive)
+				: query.OrderBy(x => x.IsActive),
+
+			"createdOn" => request.Desc
+				? query.OrderByDescending(x => x.CreatedOn)
+				: query.OrderBy(x => x.CreatedOn),
+
+			"modifiedOn" => request.Desc
+				? query.OrderByDescending(x => x.ModifiedOn)
+				: query.OrderBy(x => x.ModifiedOn),
+
+			_ => query.OrderByDescending(x => x.CreatedOn)
+		};
 
 		query = query.UsePagination(request);
 
